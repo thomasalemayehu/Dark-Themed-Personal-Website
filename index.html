@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="./assets/css/style.css" />
+
+    <!-- AOS Style Sheet -->
+    <link rel="stylesheet" href="./assets/vendors/aos/dist/aos.css" />
+
+    <!-- AOS Script -->
+    <script src="./assets/vendors/aos/dist/aos.js"></script>
+
+    <!-- AOS Init -->
+    <script>
+      AOS.init();
+    </script>
+  </head>
+  <body>
+    <!-- Navigation Section Start -->
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#my_works">My Works</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <!-- Navigation Section End -->
+
+    <!-- Landing Page Section Start -->
+    <div class="main-page-container" id="home">
+      <div class="left-content">
+        <div class="main-name">Jonathan David</div>
+        <div class="description">Front-end Developer & UI/UX Designer</div>
+      </div>
+      <div class="right-content">
+        <p>
+          # Import Libraries import numpy as np import pandas as pd import
+          matplotlib.pyplot as plt import tensorflow.compat.v2.feature_column as
+          fc from IPython.display import clear_output import tensorflow as tf #
+          Load the training dataset training_dataset =
+          pd.read_csv("./data/heart/train.csv"); # Load the evaluation dataset
+          evaluation_dataset = pd.read_csv("./data/heart/eval.csv") # Find the
+          training label training_label = training_dataset.pop("HeartDisease");
+          # Find the evaluation label evaluation_label =
+          evaluation_dataset.pop("HeartDisease"); # Locate Numerical Categories
+          NUMERICAL_COLUMNS =
+          ['Age','RestingBP','Cholesterol',"FastingBS","MaxHR","Oldpeak"] #
+          Locate Categorical Categories CATEGORICAL_COLUMNS =
+          ['Sex','ChestPainType','RestingECG',"ExerciseAngina","ST_Slope"] #
+          Convert Data feature_columns = []; for feature_name in
+          CATEGORICAL_COLUMNS: vocabulary =
+          training_dataset[feature_name].unique();
+          feature_columns.append(tf.feature_column.categorical_column_with_vocabulary_list(feature_name,
+          vocabulary)); for feature_name in NUMERICAL_COLUMNS:
+          feature_columns.append(tf.feature_column.numeric_column(feature_name,dtype=tf.float32));
+          def make_input_fn(data_df, label_df,num_epochs=10, shuffle=True,
+          batch_size=32): def input_function(): # inner function, this will be
+          returned ds = tf.data.Dataset.from_tensor_slices((dict(data_df),
+          label_df)) # create tf.data.Dataset object with data and its label if
+          shuffle: ds = ds.shuffle(1000) # randomize order of data ds =
+          ds.batch(batch_size).repeat(num_epochs) # split dataset into batches
+          of 32 and repeat process for number of epochs return ds # return a
+          batch of the dataset return input_function # train_function =
+          make_input_fn(training_dataset, training_label); evaluation_function =
+          make_input_fn(evaluation_dataset, evaluation_label,num_epochs=1,
+          shuffle=False); linear_est =
+          tf.estimator.LinearClassifier(feature_columns=feature_columns)
+          linear_est.train(train_function) # train # result =
+          linear_est.evaluate(evaluation_function) # get model metrics/stats by
+          testing on tetsing data # clear_output() # clears consoke output #
+          print(result['accuracy']) # the result variable is simply a dict of
+          stats about our model pred_dicts =
+          list(linear_est.predict(evaluation_function)) probs =
+          pd.Series([pred['probabilities'][1] for pred in pred_dicts])
+          print(probs);# Import Libraries import numpy as np import pandas as pd
+          import matplotlib.pyplot as plt import
+          tensorflow.compat.v2.feature_column as fc from IPython.display import
+          clear_output import tensorflow as tf # Load the training dataset
+          training_dataset = pd.read_csv("./data/heart/train.csv"); # Load the
+          evaluation dataset evaluation_dataset =
+          pd.read_csv("./data/heart/eval.csv") # Find the training label
+          training_label = training_dataset.pop("HeartDisease"); # Find the
+          evaluation label evaluation_label =
+          evaluation_dataset.pop("HeartDisease"); # Locate Numerical Categories
+          NUMERICAL_COLUMNS =
+          ['Age','RestingBP','Cholesterol',"FastingBS","MaxHR","Oldpeak"] #
+          Locate Categorical Categories CATEGORICAL_COLUMNS =
+          ['Sex','ChestPainType','RestingECG',"ExerciseAngina","ST_Slope"] #
+          Convert Data feature_columns = []; for feature_name in
+          CATEGORICAL_COLUMNS: vocabulary =
+          training_dataset[feature_name].unique();
+          feature_columns.append(tf.feature_column.categorical_column_with_vocabulary_list(feature_name,
+          vocabulary)); for feature_name in NUMERICAL_COLUMNS:
+          feature_columns.append(tf.feature_column.numeric_column(feature_name,dtype=tf.float32));
+          def make_input_fn(data_df, label_df,num_epochs=10, shuffle=True,
+          batch_size=32): def input_function(): # inner function, this will be
+          returned ds = tf.data.Dataset.from_tensor_slices((dict(data_df),
+          label_df)) # create tf.data.Dataset object with data and its label if
+          shuffle: ds = ds.shuffle(1000) # randomize order of data ds =
+          ds.batch(batch_size).repeat(num_epochs) # split dataset into batches
+          of 32 and repeat process for number of epochs return ds # return a
+          batch of the dataset return input_function # train_function =
+          make_input_fn(training_dataset, training_label); evaluation_function =
+          make_input_fn(evaluation_dataset, evaluation_label,num_epochs=1,
+          shuffle=False); linear_est =
+          tf.estimator.LinearClassifier(feature_columns=feature_columns)
+          linear_est.train(train_function) # train # result =
+          linear_est.evaluate(evaluation_function) # get model metrics/stats by
+          testing on tetsing data # clear_output() # clears consoke output #
+          print(result['accuracy']) # the result variable is simply a dict of
+          stats about our model pred_dicts =
+          list(linear_est.predict(evaluation_function)) probs =
+          pd.Series([pred['probabilities'][1] for pred in pred_dicts])
+          print(probs);# Import Libraries import numpy as np import pandas as pd
+          import matplotlib.pyplot as plt import
+          tensorflow.compat.v2.feature_column as fc from IPython.display import
+          clear_output import tensorflow as tf # Load the training dataset
+          training_dataset = pd.read_csv("./data/heart/train.csv"); # Load the
+          evaluation dataset evaluation_dataset =
+          pd.read_csv("./data/heart/eval.csv") # Find the training label
+          training_label = training_dataset.pop("HeartDisease"); # Find the
+          evaluation label evaluation_label =
+          evaluation_dataset.pop("HeartDisease"); # Locate Numerical Categories
+          NUMERICAL_COLUMNS =
+          ['Age','RestingBP','Cholesterol',"FastingBS","MaxHR","Oldpeak"] #
+          Locate Categorical Categories CATEGORICAL_COLUMNS =
+          ['Sex','ChestPainType','RestingECG',"ExerciseAngina","ST_Slope"] #
+          Convert Data feature_columns = []; for feature_name in
+          CATEGORICAL_COLUMNS: vocabulary =
+          training_dataset[feature_name].unique();
+          feature_columns.append(tf.feature_column.categorical_column_with_vocabulary_list(feature_name,
+          vocabulary)); for feature_name in NUMERICAL_COLUMNS:
+          feature_columns.append(tf.feature_column.numeric_column(feature_name,dtype=tf.float32));
+          def make_input_fn(data_df, label_df,num_epochs=10, shuffle=True,
+          batch_size=32): def input_function(): # inner function, this will be
+          returned ds = tf.data.Dataset.from_tensor_slices((dict(data_df),
+          label_df)) # create tf.data.Dataset object with data and its label if
+          shuffle: ds = ds.shuffle(1000) # randomize order of data ds =
+          ds.batch(batch_size).repeat(num_epochs) # split dataset into batches
+          of 32 and repeat process for number of epochs return ds # return a
+          batch of the dataset return input_function # train_function =
+          make_input_fn(training_dataset, training_label); evaluation_function =
+          make_input_fn(evaluation_dataset, evaluation_label,num_epochs=1,
+          shuffle=False); linear_est =
+          tf.estimator.LinearClassifier(feature_columns=feature_columns)
+          linear_est.train(train_function) # train # result =
+          linear_est.evaluate(evaluation_function) # get model metrics/stats by
+          testing on tetsing data # clear_output() # clears consoke output #
+          print(result['accuracy']) # the result variable is simply a dict of
+          stats about our model pred_dicts =
+          list(linear_est.predict(evaluation_function)) probs =
+          pd.Series([pred['probabilities'][1] for pred in pred_dicts])
+          print(probs);# Import Libraries import numpy as np import pandas as pd
+          import matplotlib.pyplot as plt import
+          tensorflow.compat.v2.feature_column as fc from IPython.display import
+          clear_output import tensorflow as tf # Load the training dataset
+          training_dataset = pd.read_csv("./data/heart/train.csv"); # Load the
+          evaluation dataset evaluation_dataset =
+          pd.read_csv("./data/heart/eval.csv") # Find the training label
+          training_label = training_dataset.pop("HeartDisease"); # Find the
+          evaluation label evaluation_label =
+          evaluation_dataset.pop("HeartDisease"); # Locate Numerical Categories
+          NUMERICAL_COLUMNS =
+          ['Age','RestingBP','Cholesterol',"FastingBS","MaxHR","Oldpeak"] #
+          Locate Categorical Categories CATEGORICAL_COLUMNS =
+          ['Sex','ChestPainType','RestingECG',"ExerciseAngina","ST_Slope"] #
+          Convert Data feature_columns = []; for feature_name in
+          CATEGORICAL_COLUMNS: vocabulary =
+          training_dataset[feature_name].unique();
+          feature_columns.append(tf.feature_column.categorical_column_with_vocabulary_list(feature_name,
+          vocabulary)); for feature_name in NUMERICAL_COLUMNS:
+          feature_columns.append(tf.feature_column.numeric_column(feature_name,dtype=tf.float32));
+          def make_input_fn(data_df, label_df,num_epochs=10, shuffle=True,
+          batch_size=32): def input_function(): # inner function, this will be
+          returned ds = tf.data.Dataset.from_tensor_slices((dict(data_df),
+          label_df)) # create tf.data.Dataset object with data and its label if
+          shuffle: ds = ds.shuffle(1000) # randomize order of data ds =
+          ds.batch(batch_size).repeat(num_epochs) # split dataset into batches
+          of 32 and repeat process for number of epochs return ds # return a
+          batch of the dataset return input_function # train_function =
+          make_input_fn(training_dataset, training_label); evaluation_function =
+          make_input_fn(evaluation_dataset, evaluation_label,num_epochs=1,
+          shuffle=False); linear_est =
+          tf.estimator.LinearClassifier(feature_columns=feature_columns)
+          linear_est.train(train_function) # train # result =
+          linear_est.evaluate(evaluation_function) # get model metrics/stats by
+          testing on tetsing data # clear_output() # clears consoke output #
+          print(result['accuracy']) # the result variable is simply a dict of
+          stats about our model pred_dicts =
+          list(linear_est.predict(evaluation_function)) probs =
+          pd.Series([pred['probabilities'][1] for pred in pred_dicts])
+          print(probs);# Import Libraries import numpy as np import pandas as pd
+          import matplotlib.pyplot as plt import
+          tensorflow.compat.v2.feature_column as fc from IPython.display import
+          clear_output import tensorflow as tf # Load the training dataset
+          training_dataset = pd.read_csv("./data/heart/train.csv"); # Load the
+          evaluation dataset evaluation_dataset =
+          pd.read_csv("./data/heart/eval.csv") # Find the training label
+          training_label = training_dataset.pop("HeartDisease"); # Find the
+          evaluation label evaluation_label =
+          evaluation_dataset.pop("HeartDisease"); # Locate Numerical Categories
+          NUMERICAL_COLUMNS =
+          ['Age','RestingBP','Cholesterol',"FastingBS","MaxHR","Oldpeak"] #
+          Locate Categorical Categories CATEGORICAL_COLUMNS =
+          ['Sex','ChestPainType','RestingECG',"ExerciseAngina","ST_Slope"] #
+          Convert Data feature_columns = []; for feature_name in
+          CATEGORICAL_COLUMNS: vocabulary =
+          training_dataset[feature_name].unique();
+          feature_columns.append(tf.feature_column.categorical_column_with_vocabulary_list(feature_name,
+          vocabulary)); for feature_name in NUMERICAL_COLUMNS:
+          feature_columns.append(tf.feature_column.numeric_column(feature_name,dtype=tf.float32));
+          def make_input_fn(data_df, label_df,num_epochs=10, shuffle=True,
+          batch_size=32): def input_function(): # inner function, this will be
+          returned ds = tf.data.Dataset.from_tensor_slices((dict(data_df),
+          label_df)) # create tf.data.Dataset object with data and its label if
+          shuffle: ds = ds.shuffle(1000) # randomize order of data ds =
+          ds.batch(batch_size).repeat(num_epochs) # split dataset into batches
+          of 32 and repeat process for number of epochs return ds # return a
+          batch of the dataset return input_function # train_function =
+          make_input_fn(training_dataset, training_label); evaluation_function =
+          make_input_fn(evaluation_dataset, evaluation_label,num_epochs=1,
+          shuffle=False); linear_est =
+          tf.estimator.LinearClassifier(feature_columns=feature_columns)
+          linear_est.train(train_function) # train # result =
+          linear_est.evaluate(evaluation_function) # get model metrics/stats by
+          testing on tetsing data # clear_output() # clears consoke output #
+          print(result['accuracy']) # the result variable is simply a dict of
+          stats about our model pred_dicts =
+          list(linear_est.predict(evaluation_function)) probs =
+          pd.Series([pred['probabilities'][1] for pred in pred_dicts])
+          print(probs);# Import Libraries import numpy as np import pandas as pd
+          import matplotlib.pyplot as plt import
+          tensorflow.compat.v2.feature_column as fc from IPython.display import
+          clear_output import tensorflow as tf # Load the training dataset
+          training_dataset = pd.read_csv("./data/heart/train.csv"); # Load the
+          evaluation dataset evaluation_dataset =
+          pd.read_csv("./data/heart/eval.csv") # Find the training label
+          training_label = training_dataset.pop("HeartDisease"); # Find the
+          evaluation label evaluation_label =
+          evaluation_dataset.pop("HeartDisease"); # Locate Numerical Categories
+          NUMERICAL_COLUMNS =
+          ['Age','RestingBP','Cholesterol',"FastingBS","MaxHR","Oldpeak"] #
+          Locate Categorical Categories CATEGORICAL_COLUMNS =
+          ['Sex','ChestPainType','RestingECG',"ExerciseAngina","ST_Slope"] #
+          Convert Data feature_columns = []; for feature_name in
+          CATEGORICAL_COLUMNS: vocabulary =
+          training_dataset[feature_name].unique();
+          feature_columns.append(tf.feature_column.categorical_column_with_vocabulary_list(feature_name,
+          vocabulary)); for feature_name in NUMERICAL_COLUMNS:
+          feature_columns.append(tf.feature_column.numeric_column(feature_name,dtype=tf.float32));
+          def make_input_fn(data_df, label_df,num_epochs=10, shuffle=True,
+          batch_size=32): def input_function(): # inner function, this will be
+          returned ds = tf.data.Dataset.from_tensor_slices((dict(data_df),
+          label_df)) # create tf.data.Dataset object with data and its label if
+          shuffle: ds = ds.shuffle(1000) # randomize order of data ds =
+          ds.batch(batch_size).repeat(num_epochs) # split dataset into batches
+          of 32 and repeat process for number of epochs return ds # return a
+          batch of the dataset return input_function # train_function =
+          make_input_fn(training_dataset, training_label); evaluation_function =
+          make_input_fn(evaluation_dataset, evaluation_label,num_epochs=1,
+          shuffle=False); linear_est =
+          tf.estimator.LinearClassifier(feature_columns=feature_columns)
+          linear_est.train(train_function) # train # result =
+          linear_est.evaluate(evaluation_function) # get model metrics/stats by
+          testing on tetsing data # clear_output() # clears consoke output #
+          print(result['accuracy']) # the result variable is simply a dict of
+          stats about our model pred_dicts =
+          list(linear_est.predict(evaluation_function)) probs =
+          pd.Series([pred['probabilities'][1] for pred in pred_dicts])
+          print(probs);# Import Libraries import numpy as np import pandas as pd
+          import matplotlib.pyplot as plt import
+          tensorflow.compat.v2.feature_column as fc from IPython.display import
+          clear_output import tensorflow as tf # Load the training dataset
+          training_dataset = pd.read_csv("./data/heart/train.csv"); # Load the
+          evaluation dataset evaluation_dataset =
+          pd.read_csv("./data/heart/eval.csv") # Find the training label
+          training_label = training_dataset.pop("HeartDisease"); # Find the
+          evaluation label evaluation_label =
+          evaluation_dataset.pop("HeartDisease"); # Locate Numerical Categories
+          NUMERICAL_COLUMNS =
+          ['Age','RestingBP','Cholesterol',"FastingBS","MaxHR","Oldpeak"] #
+          Locate Categorical Categories CATEGORICAL_COLUMNS =
+          ['Sex','ChestPainType','RestingECG',"ExerciseAngina","ST_Slope"] #
+          Convert Data feature_columns = []; for feature_name in
+          CATEGORICAL_COLUMNS: vocabulary =
+          training_dataset[feature_name].unique();
+          feature_columns.append(tf.feature_column.categorical_column_with_vocabulary_list(feature_name,
+          vocabulary)); for feature_name in NUMERICAL_COLUMNS:
+          feature_columns.append(tf.feature_column.numeric_column(feature_name,dtype=tf.float32));
+          def make_input_fn(data_df, label_df,num_epochs=10, shuffle=True,
+          batch_size=32): def input_function(): # inner function, this will be
+          returned ds = tf.data.Dataset.from_tensor_slices((dict(data_df),
+          label_df)) # create tf.data.Dataset object with data and its label if
+          shuffle: ds = ds.shuffle(1000) # randomize order of data ds =
+          ds.batch(batch_size).repeat(num_epochs) # split dataset into batches
+          of 32 and repeat process for number of epochs return ds # return a
+          batch of the dataset return input_function # train_function =
+          make_input_fn(training_dataset, training_label); evaluation_function =
+          make_input_fn(evaluation_dataset, evaluation_label,num_epochs=1,
+          shuffle=False); linear_est =
+          tf.estimator.LinearClassifier(feature_columns=feature_columns)
+          linear_est.train(train_function) # train # result =
+          linear_est.evaluate(evaluation_function) # get model metrics/stats by
+          testing on tetsing data # clear_output() # clears consoke output #
+          print(result['accuracy']) # the result variable is simply a dict of
+          stats about our model pred_dicts =
+          list(linear_est.predict(evaluation_function)) probs =
+          pd.Series([pred['probabilities'][1] for pred in pred_dicts])
+          print(probs);# Import Libraries import numpy as np import pandas as pd
+          import matplotlib.pyplot as plt import
+          tensorflow.compat.v2.feature_column as fc from IPython.display import
+          clear_output import tensorflow as tf # Load the training dataset
+          training_dataset = pd.read_csv("./data/heart/train.csv"); # Load the
+          evaluation dataset evaluation_dataset =
+          pd.read_csv("./data/heart/eval.csv") # Find the training label
+          training_label = training_dataset.pop("HeartDisease"); # Find the
+          evaluation label evaluation_label =
+          evaluation_dataset.pop("HeartDisease"); # Locate Numerical Categories
+          NUMERICAL_COLUMNS =
+          ['Age','RestingBP','Cholesterol',"FastingBS","MaxHR","Oldpeak"] #
+          Locate Categorical Categories CATEGORICAL_COLUMNS =
+          ['Sex','ChestPainType','RestingECG',"ExerciseAngina","ST_Slope"] #
+          Convert Data feature_columns = []; for feature_name in
+          CATEGORICAL_COLUMNS: vocabulary =
+          training_dataset[feature_name].unique();
+          feature_columns.append(tf.feature_column.categorical_column_with_vocabulary_list(feature_name,
+          vocabulary)); for feature_name in NUMERICAL_COLUMNS:
+          feature_columns.append(tf.feature_column.numeric_column(feature_name,dtype=tf.float32));
+          def make_input_fn(data_df, label_df,num_epochs=10, shuffle=True,
+          batch_size=32): def input_function(): # inner function, this will be
+          returned ds = tf.data.Dataset.from_tensor_slices((dict(data_df),
+          label_df)) # create tf.data.Dataset object with data and its label if
+          shuffle: ds = ds.shuffle(1000) # randomize order of data ds =
+          ds.batch(batch_size).repeat(num_epochs) # split dataset into batches
+          of 32 and repeat process for number of epochs return ds # return a
+          batch of the dataset return input_function # train_function =
+          make_input_fn(training_dataset, training_label); evaluation_function =
+          make_input_fn(evaluation_dataset, evaluation_label,num_epochs=1,
+          shuffle=False); linear_est =
+          tf.estimator.LinearClassifier(feature_columns=feature_columns)
+          linear_est.train(train_function) # train # result =
+          linear_est.evaluate(evaluation_function) # get model metrics/stats by
+          testing on tetsing data # clear_output() # clears consoke output #
+          print(result['accuracy']) # the result variable is simply a dict of
+          stats about our model pred_dicts =
+          list(linear_est.predict(evaluation_function)) probs =
+          pd.Series([pred['probabilities'][1] for pred in pred_dicts])
+          print(probs);
+        </p>
+        <br />
+        <p></p>
+      </div>
+    </div>
+    <!-- Landing Page Section End -->
+
+    <!-- About Page Section Start -->
+    <div class="about-page-container" id="about">
+      <div class="about-animated-container">About Me</div>
+      <div class="about-content">
+        Front-end developer who cares deeply about user experience. Serious
+        passion for UI design and new technologies.
+      </div>
+      <div class="about-slogan">
+        <div class="triangle-image-slogan"></div>
+        <div class="about-slogan-content-one">" Do what you love</div>
+        <div class="about-slogan-content-two">love what you do."</div>
+      </div>
+    </div>
+    <!-- About Page Section End -->
+
+    <!-- First Work Section Start -->
+    <div class="works-container" id="my_works">
+      <div class="number-description">01</div>
+      <div class="work-main-section">
+        <div class="work-main-content">
+          <p class="work-main-title">The Title</p>
+          <p class="work-main-category">
+            Full Stack Developer <span class="dot-icon">•</span> UI Designer
+          </p>
+          <p class="work-main-text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus
+            repellendus officia veritatis vitae repellat aliquid quam. Aliquam
+            aspernatur vitae deleniti minus fugiat dicta voluptatum laboriosam
+            deserunt odit, magni suscipit fuga!Lorem ipsum dolor sit amet
+            consectetur adipisicing elit.
+          </p>
+        </div>
+        <div class="work-main-images"></div>
+      </div>
+      <div class="work-type">Work Type</div>
+    </div>
+    <!-- First Work Section End -->
+
+    <!-- Second Work Section Start -->
+    <div class="works-container">
+      <div class="number-description inverted">01</div>
+      <div class="work-main-section">
+        <div class="work-main-images"></div>
+        <div class="work-main-content">
+          <p class="work-main-title">The Title</p>
+          <p class="work-main-category">
+            Full Stack Developer <span class="dot-icon">•</span> UI Designer
+          </p>
+          <p class="work-main-text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus
+            repellendus officia veritatis vitae repellat aliquid quam. Aliquam
+            aspernatur vitae deleniti minus fugiat dicta voluptatum laboriosam
+            deserunt odit, magni suscipit fuga!Lorem ipsum dolor sit amet
+            consectetur adipisicing elit.
+          </p>
+        </div>
+      </div>
+      <div class="work-type inverted">Work Type</div>
+    </div>
+    <!-- Second Work Section End -->
+
+    <!-- Third Work Section Start -->
+    <div class="works-container">
+      <div class="number-description">01</div>
+      <div class="work-main-section">
+        <div class="work-main-content">
+          <p class="work-main-title">The Title</p>
+          <p class="work-main-category">
+            Full Stack Developer <span class="dot-icon">•</span> UI Designer
+          </p>
+          <p class="work-main-text">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus
+            repellendus officia veritatis vitae repellat aliquid quam. Aliquam
+            aspernatur vitae deleniti minus fugiat dicta voluptatum laboriosam
+            deserunt odit, magni suscipit fuga!Lorem ipsum dolor sit amet
+            consectetur adipisicing elit.
+          </p>
+        </div>
+        <div class="work-main-images"></div>
+      </div>
+      <div class="work-type">Work Type</div>
+    </div>
+    <!-- Third Work Section End-->
+
+    <!-- Skills Section Start -->
+    <div class="skills-main-container" id="services">
+      <div class="skills-divider">
+        <div class="skills-container left">
+          <p class="skills">HTML</p>
+          <p class="skills">CSS</p>
+          <p class="skills">Javascript</p>
+        </div>
+        <div class="skills-container right">
+          <p class="skills">Responsive Design</p>
+          <p class="skills">Testing & Debugging</p>
+          <p class="skills">Application Architecture</p>
+        </div>
+      </div>
+      <div class="skills-divider end-divider">
+        <div class="skills-container left">
+          <p class="skills">Rapid Prototyping</p>
+          <p class="skills">Functional Programming</p>
+          <p class="skills">Interaction Development</p>
+        </div>
+
+        <div class="skills-container right">
+          <p class="skills">Vue</p>
+          <p class="skills">Node.js</p>
+          <p class="skills">Python</p>
+        </div>
+      </div>
+
+      <div class="animated-skills-background">Skills</div>
+    </div>
+    <!-- Skills Section End -->
+
+    <!-- Contact Section Start -->
+    <div class="contact-container" id="contact">
+      <div class="social-container">
+        <div class="social-icon twitter"></div>
+        <a class="social-name" href="#">Twitter</a>
+      </div>
+      <div class="social-container">
+        <div class="social-icon github"></div>
+        <a class="social-name" href="#">Github</a>
+      </div>
+
+      <div class="social-container">
+        <div class="social-icon telegram"></div>
+        <a class="social-name" href="#">Telegram</a>
+      </div>
+
+      <div class="social-container">
+        <div class="social-icon instagram"></div>
+        <a class="social-name" href="#">instagram</a>
+      </div>
+
+      <div class="social-container">
+        <div class="social-icon whatsapp"></div>
+        <a class="social-name" href="">Whatsapp</a>
+      </div>
+
+      <div class="social-container">
+        <div class="social-icon linkedin"></div>
+        <a class="social-name" href="#">Linkedin</a>
+      </div>
+
+      <div class="contact-animated-background">Contact</div>
+    </div>
+
+    <!-- Contact Section End -->
+  </body>
+</html>
