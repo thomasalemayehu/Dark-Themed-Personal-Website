@@ -325,6 +325,7 @@ nav a:hover {
   align-items: flex-start;
 }
 .skills {
+  z-index: 4000;
   font-size: 1.8rem;
   font-family: "Montserrat";
   font-weight: 500;
@@ -385,6 +386,7 @@ nav a:hover {
   justify-content: space-around;
 }
 .social-container {
+  z-index: 3000;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -395,12 +397,16 @@ nav a:hover {
   width: 80px;
   height: 80px;
 }
+.social-container:hover .social-name {
+  opacity: 1;
+}
 
 .social-name:hover {
   opacity: 1;
   font-size: 1.8rem;
   letter-spacing: 4px;
 }
+
 .social-name {
   transition: all 0.25s;
   text-decoration: none;
